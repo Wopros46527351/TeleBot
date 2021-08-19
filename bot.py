@@ -1,12 +1,17 @@
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
+import telebot
+import ast
+import time
+from telebot import types
 PORT = int(os.environ.get('PORT', 5000))
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
-
+stringList = {"Name": "John", "Language": "Python", "API": "pyTelegramBotAPI"}
+crossIcon = u"\u274C"
 logger = logging.getLogger(__name__)
 TOKEN = '1981878407:AAHq7VSsqSPr0nqEZFMw_SHiu98G4IPUaJw'
 
@@ -38,6 +43,8 @@ def main():
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
 
+    
+
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
@@ -58,6 +65,16 @@ def main():
     # SIGTERM or SIGABRT. This should be used most of the time, since
     # start_polling() is non-blocking and will stop the bot gracefully.
     updater.idle()
+def makeKeyboard():
+    markup = types.InlineKeyboardMarkup()
+
+    for key, value in stringList.items():
+        markup.add(types.InlineKeyboardButton(text=value,
+                                              callback_data="['value', '" + value + "', '" + key + "']"),
+        types.InlineKeyboardButton(text=crossIcon,
+                                   callback_data="['key', '" + key + "']"))
+
+    return markup
 
 if __name__ == '__main__':
     main()
