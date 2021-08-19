@@ -2,8 +2,9 @@ from telethon import TelegramClient, events
 from telethon.tl.types import KeyboardButton, KeyboardButtonCallback
 import random
 
+token = '1980716029:AAGBw9fQlcZDGPZFajokfEWml-YTkf1fD1w'
 
-bot = TelegramClient('bot', 7465073, 'fccfbedddb2a3599955982c7983d8064').start(bot_token='1904656129:AAEq2rE_RSt0zfYfk2uRjsBjwMd2VthpCUA')
+bot = TelegramClient('bot', 7465073, 'fccfbedddb2a3599955982c7983d8064').start(bot_token=token)
 
 
 @bot.on(events.NewMessage(pattern='/start'))
